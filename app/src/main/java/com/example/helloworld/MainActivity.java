@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     EditText edtValor1;
     EditText edtValor2;
     TextView txtResultado;
@@ -37,10 +37,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtResultado = findViewById(R.id.txtResultado);
         btnSomar = findViewById(R.id.btnSomar);
 
-        btnSomar.setOnClickListener(this);
+        btnSomar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(MainActivity.this, "Esse botão serve para realizar a soma de dois valores",
+                Toast.LENGTH_SHORT).show();
+                return true; // os eventos subsequentes não são executados
+            }
+        });
     }
-    @Override
-    public void onClick(View v) {
+
+    public void onBtnSomarClick(View v) {
         try {
             Double valor1 = Double.parseDouble(edtValor1.getText().toString());
             Double valor2 = Double.parseDouble(edtValor2.getText().toString());
@@ -50,6 +57,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ex.printStackTrace();
             Toast.makeText(MainActivity.this, "Informe valores validos", Toast.LENGTH_LONG).show();
         }
-
     }
 }
