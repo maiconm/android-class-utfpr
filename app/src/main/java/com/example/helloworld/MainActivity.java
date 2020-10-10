@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edtValor1;
     EditText edtValor2;
     TextView txtResultado;
@@ -37,22 +37,19 @@ public class MainActivity extends AppCompatActivity {
         txtResultado = findViewById(R.id.txtResultado);
         btnSomar = findViewById(R.id.btnSomar);
 
-        btnSomar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Double valor1 = Double.parseDouble(edtValor1.getText().toString());
-                    Double valor2 = Double.parseDouble(edtValor2.getText().toString());
-                    Double resultado = valor1 + valor2;
-                    txtResultado.setText(String.valueOf(resultado));
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Informe valores validos", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
+        btnSomar.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        try {
+            Double valor1 = Double.parseDouble(edtValor1.getText().toString());
+            Double valor2 = Double.parseDouble(edtValor2.getText().toString());
+            Double resultado = valor1 + valor2;
+            txtResultado.setText(String.valueOf(resultado));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            Toast.makeText(MainActivity.this, "Informe valores validos", Toast.LENGTH_LONG).show();
+        }
 
     }
 }
